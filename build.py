@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Build the plugin zip and repo.xml. Run this, then attach the zip to a release."""
-import hashlib, pathlib, re, subprocess, zipfile
+import hashlib, pathlib, re, subprocess, time, zipfile
 
 GITHUB = "https://github.com/gitdrk/lyrion-weather-alerts"
 source = pathlib.Path("WeatherAlerts")
@@ -14,7 +14,8 @@ with zipfile.ZipFile(target, "w", zipfile.ZIP_DEFLATED) as archive:
     for path in files:
         if not path.is_file():
             raise SystemExit(f"Cannot read {path}. Is the folder path too long?")
-        info = zipfile.ZipInfo(path.relative_to(source).as_posix())
+        # A real date matters: Lyrion only reloads strings when file times change.
+        info = zipfile.ZipInfo(path.relative_to(source).as_posix(), time.localtime()[:6])
         info.create_system = 3
         info.compress_type = zipfile.ZIP_DEFLATED
         info.external_attr = 0o644 << 16
