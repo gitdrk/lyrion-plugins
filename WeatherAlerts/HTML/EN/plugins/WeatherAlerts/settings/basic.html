@@ -1,0 +1,7 @@
+[% PROCESS settings/header.html %]
+
+	[% WRAPPER setting title="PLUGIN_WEATHERALERTS_ZONE" desc="PLUGIN_WEATHERALERTS_ZONE_DESC" %]
+		<input type="text" class="stdedit" name="pref_zone" id="zone" value="[% prefs.pref_zone | html %]" size="10">
+	[% END %]
+
+[% PROCESS settings/footer.html %]

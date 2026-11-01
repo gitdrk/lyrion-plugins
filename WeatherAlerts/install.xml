@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<extension>
+	<id>57758C7A-B66A-4622-8B02-4562EFD005F8</id>
+	<name>PLUGIN_WEATHERALERTS</name>
+	<module>Plugins::WeatherAlerts::Plugin</module>
+	<version>0.1.0</version>
+	<description>PLUGIN_WEATHERALERTS_DESC</description>
+	<creator>gitdrk</creator>
+	<category>misc</category>
+	<defaultState>enabled</defaultState>
+	<optionsURL>plugins/WeatherAlerts/settings/basic.html</optionsURL>
+	<type>2</type><!-- type=extension -->
+
+	<targetApplication>
+		<id>Lyrion Music Server</id>
+		<minVersion>9.0</minVersion>
+		<maxVersion>*</maxVersion>
+	</targetApplication>
+</extension>

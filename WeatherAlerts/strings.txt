@@ -1,0 +1,11 @@
+PLUGIN_WEATHERALERTS
+	EN	Weather Alerts
+
+PLUGIN_WEATHERALERTS_DESC
+	EN	Plays National Weather Service alerts on your Squeezeboxes, then restores what was playing.
+
+PLUGIN_WEATHERALERTS_ZONE
+	EN	Alert zone
+
+PLUGIN_WEATHERALERTS_ZONE_DESC
+	EN	Your National Weather Service county or zone code, such as OHC049.
