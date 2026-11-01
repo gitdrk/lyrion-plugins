@@ -16,7 +16,7 @@ use Slim::Utils::Timers;
 use Plugins::WeatherAlerts::Policy;
 
 use constant URL        => 'https://api.weather.gov/alerts/active';
-use constant USER_AGENT => '(lyrion-weather-alerts, https://github.com/gitdrk/lyrion-weather-alerts)';
+use constant USER_AGENT => '(lyrion-plugins, https://github.com/gitdrk/lyrion-plugins)';
 use constant TIMEOUT    => 20;
 
 my $log   = logger('plugin.weatheralerts');

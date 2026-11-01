@@ -4,7 +4,7 @@
 	<id>57758C7A-B66A-4622-8B02-4562EFD005F8</id>
 	<name>PLUGIN_WEATHERALERTS</name>
 	<module>Plugins::WeatherAlerts::Plugin</module>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<description>PLUGIN_WEATHERALERTS_DESC</description>
 	<creator>gitdrk</creator>
 	<category>misc</category>
