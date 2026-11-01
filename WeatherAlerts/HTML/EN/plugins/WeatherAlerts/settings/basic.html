@@ -1,7 +1,25 @@
 [% PROCESS settings/header.html %]
 
-	[% WRAPPER setting title="PLUGIN_WEATHERALERTS_ZONE" desc="PLUGIN_WEATHERALERTS_ZONE_DESC" %]
-		<input type="text" class="stdedit" name="pref_zone" id="zone" value="[% prefs.pref_zone | html %]" size="10">
+	[% WRAPPER setting title="PLUGIN_WEATHERALERTS_ZONES" desc="PLUGIN_WEATHERALERTS_ZONES_DESC" %]
+		<input type="text" class="stdedit" name="pref_zones" id="zones" value="[% prefs.pref_zones | html %]" size="24">
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_WEATHERALERTS_EVENTS" desc="PLUGIN_WEATHERALERTS_EVENTS_DESC" %]
+		<table>
+		[% FOREACH event = events %]
+			[% key = 'pref_level_' _ event.code %]
+			<tr>
+				<td><label for="[% key %]">[% event.name | html %]</label></td>
+				<td>
+					<select name="[% key %]" id="[% key %]">
+					[% FOREACH level = levels %]
+						<option value="[% level %]" [% IF prefs.$key == level %]selected[% END %]>[% "PLUGIN_WEATHERALERTS_LEVEL_$level" | string %]</option>
+					[% END %]
+					</select>
+				</td>
+			</tr>
+		[% END %]
+		</table>
 	[% END %]
 
 [% PROCESS settings/footer.html %]

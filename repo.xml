@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <extensions>
   <details>
-    <title lang="EN">Lyrion Weather Alerts</title>
+    <title lang="EN">NOAA Weather Alerts (USA)</title>
   </details>
   <plugins>
-    <plugin name="WeatherAlerts" version="0.1.0" minTarget="9.0" maxTarget="*">
-      <title lang="EN">Weather Alerts</title>
-      <desc lang="EN">Plays National Weather Service alerts on your Squeezeboxes, then restores what was playing.</desc>
+    <plugin name="WeatherAlerts" version="0.2.0" minTarget="9.0" maxTarget="*">
+      <title lang="EN">NOAA Weather Alerts (USA)</title>
+      <desc lang="EN">Plays U.S. National Weather Service alerts on your Squeezeboxes, then restores what was playing. Unofficial, and not affiliated with NOAA.</desc>
       <creator>gitdrk</creator>
       <category>misc</category>
       <link>https://github.com/gitdrk/lyrion-weather-alerts</link>
-      <url>https://github.com/gitdrk/lyrion-weather-alerts/releases/download/v0.1.0/WeatherAlerts-0.1.0.zip</url>
-      <sha>12a8d44b3362913975b6bd225bd0bd7d15f594bb</sha>
+      <url>https://github.com/gitdrk/lyrion-weather-alerts/releases/download/v0.2.0/WeatherAlerts-0.2.0.zip</url>
+      <sha>836d53235948265693a13759c2fa636ecd304500</sha>
     </plugin>
   </plugins>
 </extensions>

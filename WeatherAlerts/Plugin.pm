@@ -6,6 +6,8 @@ use base qw(Slim::Plugin::Base);
 use Slim::Utils::Log;
 use Slim::Utils::Prefs;
 
+use Plugins::WeatherAlerts::Events;
+
 if ( main::WEBUI ) {
 	require Plugins::WeatherAlerts::Settings;
 }
@@ -19,7 +21,8 @@ my $log = Slim::Utils::Log->addLogCategory({
 });
 
 $prefs->init({
-	zone => '',
+	zones => '',
+	map { ('level_' . $_->{code} => $_->{level}) } Plugins::WeatherAlerts::Events::EVENTS,
 });
 
 sub getDisplayName {
@@ -35,7 +38,7 @@ sub initPlugin {
 		Plugins::WeatherAlerts::Settings->new;
 	}
 
-	$log->info('Weather Alerts started, zone: ' . ($prefs->get('zone') || 'not set'));
+	$log->info('Weather Alerts started, zones: ' . ($prefs->get('zones') || 'not set'));
 }
 
 1;

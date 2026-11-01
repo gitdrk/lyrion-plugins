@@ -1,11 +1,29 @@
 PLUGIN_WEATHERALERTS
-	EN	Weather Alerts
+	EN	NOAA Weather Alerts (USA)
 
 PLUGIN_WEATHERALERTS_DESC
-	EN	Plays National Weather Service alerts on your Squeezeboxes, then restores what was playing.
+	EN	Plays U.S. National Weather Service alerts on your Squeezeboxes, then restores what was playing. Unofficial, and not affiliated with NOAA.
 
-PLUGIN_WEATHERALERTS_ZONE
-	EN	Alert zone
+PLUGIN_WEATHERALERTS_ZONES
+	EN	Alert zones
 
-PLUGIN_WEATHERALERTS_ZONE_DESC
-	EN	Your National Weather Service county or zone code, such as OHC049.
+PLUGIN_WEATHERALERTS_ZONES_DESC
+	EN	Your National Weather Service county and forecast zone codes, separated by commas, such as INC043,INZ091.
+
+PLUGIN_WEATHERALERTS_EVENTS
+	EN	Alert types
+
+PLUGIN_WEATHERALERTS_EVENTS_DESC
+	EN	Choose what each alert type does. These choices are saved now and take effect once live alerts are added.
+
+PLUGIN_WEATHERALERTS_LEVEL_interrupt
+	EN	Interrupt every player
+
+PLUGIN_WEATHERALERTS_LEVEL_announce
+	EN	Interrupt players already on
+
+PLUGIN_WEATHERALERTS_LEVEL_display
+	EN	Show on screen only
+
+PLUGIN_WEATHERALERTS_LEVEL_off
+	EN	Off

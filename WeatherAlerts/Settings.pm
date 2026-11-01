@@ -5,6 +5,8 @@ use base qw(Slim::Web::Settings);
 
 use Slim::Utils::Prefs;
 
+use Plugins::WeatherAlerts::Events;
+
 my $prefs = preferences('plugin.weatheralerts');
 
 sub name {
@@ -16,7 +18,14 @@ sub page {
 }
 
 sub prefs {
-	return ($prefs, qw(zone));
+	return ($prefs, 'zones', map { 'level_' . $_->{code} } Plugins::WeatherAlerts::Events::EVENTS);
+}
+
+sub beforeRender {
+	my ($class, $params) = @_;
+
+	$params->{events} = [ Plugins::WeatherAlerts::Events::EVENTS ];
+	$params->{levels} = [ Plugins::WeatherAlerts::Events::LEVELS ];
 }
 
 1;
