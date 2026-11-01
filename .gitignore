@@ -1,2 +1,4 @@
 *.zip
 __pycache__/
+tools/watch_alert.py
+tools/player_suite.py
