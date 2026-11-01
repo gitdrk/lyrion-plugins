@@ -4,17 +4,50 @@ PLUGIN_WEATHERALERTS
 PLUGIN_WEATHERALERTS_DESC
 	EN	Plays U.S. National Weather Service alerts on your Squeezeboxes, then restores what was playing. Unofficial, and not affiliated with NOAA.
 
+PLUGIN_WEATHERALERTS_STATUS
+	EN	Alert feed
+
+PLUGIN_WEATHERALERTS_FEED_OK
+	EN	Last checked:
+
+PLUGIN_WEATHERALERTS_ACTIVE
+	EN	Active alerts for your zones:
+
+PLUGIN_WEATHERALERTS_FEED_BAD
+	EN	Alerts are not being received.
+
+PLUGIN_WEATHERALERTS_BACKUP
+	EN	This plugin needs power, your network and the internet. Keep a battery-backed weather radio as your primary warning.
+
+PLUGIN_WEATHERALERTS_TEST
+	EN	Test
+
+PLUGIN_WEATHERALERTS_TEST_DESC
+	EN	Plays a test alert on every selected player at the test volume, then restores them.
+
+PLUGIN_WEATHERALERTS_SEND_TEST
+	EN	Send test alert
+
+PLUGIN_WEATHERALERTS_STOP
+	EN	Stop alert
+
 PLUGIN_WEATHERALERTS_ZONES
 	EN	Alert zones
 
 PLUGIN_WEATHERALERTS_ZONES_DESC
 	EN	Your National Weather Service county and forecast zone codes, separated by commas, such as INC043,INZ091.
 
+PLUGIN_WEATHERALERTS_POLL
+	EN	Check every (seconds)
+
+PLUGIN_WEATHERALERTS_POLL_DESC
+	EN	How often to check for new alerts, from 30 to 3600 seconds.
+
 PLUGIN_WEATHERALERTS_EVENTS
 	EN	Alert types
 
 PLUGIN_WEATHERALERTS_EVENTS_DESC
-	EN	Choose what each alert type does. These choices are saved now and take effect once live alerts are added.
+	EN	Choose what each alert type does. Warnings set to interrupt every player ignore quiet hours.
 
 PLUGIN_WEATHERALERTS_LEVEL_INTERRUPT
 	EN	Interrupt every player
@@ -27,3 +60,36 @@ PLUGIN_WEATHERALERTS_LEVEL_DISPLAY
 
 PLUGIN_WEATHERALERTS_LEVEL_OFF
 	EN	Off
+
+PLUGIN_WEATHERALERTS_VOLUME
+	EN	Alert volume
+
+PLUGIN_WEATHERALERTS_VOLUME_DESC
+	EN	Volume for real alerts, from 1 to 100.
+
+PLUGIN_WEATHERALERTS_TEST_VOLUME
+	EN	Test volume
+
+PLUGIN_WEATHERALERTS_TEST_VOLUME_DESC
+	EN	Volume for test alerts, from 1 to 100.
+
+PLUGIN_WEATHERALERTS_PLAYERS
+	EN	Players
+
+PLUGIN_WEATHERALERTS_PLAYERS_DESC
+	EN	Tick the players that receive alerts. Enter a volume to override the alert volume for that player.
+
+PLUGIN_WEATHERALERTS_QUIET
+	EN	Quiet hours
+
+PLUGIN_WEATHERALERTS_QUIET_DESC
+	EN	Holds lower-priority alerts until the end of this window. Use 24-hour times.
+
+PLUGIN_WEATHERALERTS_QUIET_ON
+	EN	Use quiet hours
+
+PLUGIN_WEATHERALERTS_PIPER
+	EN	Piper speech server
+
+PLUGIN_WEATHERALERTS_PIPER_DESC
+	EN	Optional. The URL of a Piper HTTP server, used to read the full alert text. Without one, a short recorded phrase is used.

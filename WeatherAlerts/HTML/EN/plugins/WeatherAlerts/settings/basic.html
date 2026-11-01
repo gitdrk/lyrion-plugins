@@ -1,7 +1,26 @@
 [% PROCESS settings/header.html %]
 
+	[% WRAPPER setting title="PLUGIN_WEATHERALERTS_STATUS" desc="" %]
+		[% IF feedOk %]
+			<div>[% "PLUGIN_WEATHERALERTS_FEED_OK" | string %] [% feedChecked | html %]</div>
+			<div>[% "PLUGIN_WEATHERALERTS_ACTIVE" | string %] [% feedActive | html %]</div>
+		[% ELSE %]
+			<div><b>[% "PLUGIN_WEATHERALERTS_FEED_BAD" | string %]</b> [% feedError | html %]</div>
+		[% END %]
+		<div class="prefDesc">[% "PLUGIN_WEATHERALERTS_BACKUP" | string %]</div>
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_WEATHERALERTS_TEST" desc="PLUGIN_WEATHERALERTS_TEST_DESC" %]
+		<input type="submit" class="stdclick" name="sendTest" value="[% "PLUGIN_WEATHERALERTS_SEND_TEST" | string %]">
+		<input type="submit" class="stdclick" name="stopAlert" value="[% "PLUGIN_WEATHERALERTS_STOP" | string %]">
+	[% END %]
+
 	[% WRAPPER setting title="PLUGIN_WEATHERALERTS_ZONES" desc="PLUGIN_WEATHERALERTS_ZONES_DESC" %]
 		<input type="text" class="stdedit" name="pref_zones" id="zones" value="[% prefs.pref_zones | html %]" size="24">
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_WEATHERALERTS_POLL" desc="PLUGIN_WEATHERALERTS_POLL_DESC" %]
+		<input type="text" class="stdedit" name="pref_pollSeconds" id="pollSeconds" value="[% prefs.pref_pollSeconds | html %]" size="6">
 	[% END %]
 
 	[% WRAPPER setting title="PLUGIN_WEATHERALERTS_EVENTS" desc="PLUGIN_WEATHERALERTS_EVENTS_DESC" %]
@@ -20,6 +39,36 @@
 			</tr>
 		[% END %]
 		</table>
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_WEATHERALERTS_VOLUME" desc="PLUGIN_WEATHERALERTS_VOLUME_DESC" %]
+		<input type="text" class="stdedit" name="pref_alertVolume" id="alertVolume" value="[% prefs.pref_alertVolume | html %]" size="4">
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_WEATHERALERTS_TEST_VOLUME" desc="PLUGIN_WEATHERALERTS_TEST_VOLUME_DESC" %]
+		<input type="text" class="stdedit" name="pref_testVolume" id="testVolume" value="[% prefs.pref_testVolume | html %]" size="4">
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_WEATHERALERTS_PLAYERS" desc="PLUGIN_WEATHERALERTS_PLAYERS_DESC" %]
+		<table>
+		[% FOREACH player = players %]
+			<tr>
+				<td><label><input type="checkbox" name="player_enabled_[% player.key %]" value="1" [% IF player.enabled %]checked[% END %]> [% player.name | html %]</label></td>
+				<td><input type="text" class="stdedit" name="player_volume_[% player.key %]" value="[% player.volume | html %]" size="4"></td>
+			</tr>
+		[% END %]
+		</table>
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_WEATHERALERTS_QUIET" desc="PLUGIN_WEATHERALERTS_QUIET_DESC" %]
+		<label><input type="checkbox" name="pref_quietEnabled" value="1" [% IF prefs.pref_quietEnabled %]checked[% END %]> [% "PLUGIN_WEATHERALERTS_QUIET_ON" | string %]</label>
+		<input type="text" class="stdedit" name="pref_quietStart" value="[% prefs.pref_quietStart | html %]" size="6">
+		&ndash;
+		<input type="text" class="stdedit" name="pref_quietEnd" value="[% prefs.pref_quietEnd | html %]" size="6">
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_WEATHERALERTS_PIPER" desc="PLUGIN_WEATHERALERTS_PIPER_DESC" %]
+		<input type="text" class="stdedit" name="pref_piperUrl" id="piperUrl" value="[% prefs.pref_piperUrl | html %]" size="40">
 	[% END %]
 
 [% PROCESS settings/footer.html %]

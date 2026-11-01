@@ -18,4 +18,13 @@ use constant EVENTS => (
 	{ code => 'OTHER', name => 'All other alerts',            level => 'display' },
 );
 
+my %codeForName = map { lc($_->{name}) => $_->{code} } EVENTS;
+
+# Many alerts carry the placeholder SAME code NWS, so the event name comes first.
+sub codeFor {
+	my ($class, $eventName) = @_;
+
+	return $codeForName{ lc($eventName || '') } || 'OTHER';
+}
+
 1;
