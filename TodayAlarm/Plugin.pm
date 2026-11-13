@@ -181,7 +181,8 @@ sub _alarm {
 	my $id = $client->id;
 
 	if ($event eq 'sound') {
-		my $alarm = Slim::Utils::Alarm->getAlarm($client, $request->getRequest(2));
+		# The alarm ID is a named parameter on this notification.
+		my $alarm = Slim::Utils::Alarm->getAlarm($client, $request->getParam('_id')) || $client->alarmData->{currentAlarm};
 
 		# The chime is short, so it repeats until the alarm ends.
 		if ($alarm && $chimeUrl && ($alarm->playlist || '') eq $chimeUrl) {
