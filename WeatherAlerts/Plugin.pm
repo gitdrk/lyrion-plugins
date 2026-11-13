@@ -16,6 +16,7 @@ use Plugins::WeatherAlerts::Events;
 use Plugins::WeatherAlerts::Feed;
 use Plugins::WeatherAlerts::Policy;
 use Plugins::WeatherAlerts::Takeover;
+use Plugins::WeatherAlerts::Wyoming;
 
 if ( main::WEBUI ) {
 	require Plugins::WeatherAlerts::Settings;
@@ -41,7 +42,8 @@ $prefs->init({
 	pollSeconds  => 60,
 	alertVolume  => 70,
 	testVolume   => 25,
-	piperUrl     => '',
+	speechServer => '',
+	voice        => 'en_US-lessac-medium',
 	quietEnabled => 0,
 	quietStart   => '22:00',
 	quietEnd     => '07:00',
@@ -52,8 +54,35 @@ $prefs->init({
 $prefs->setValidate({ validator => 'intlimit', low => 30, high => 3600 }, 'pollSeconds');
 $prefs->setValidate({ validator => 'intlimit', low => 1,  high => 100 }, qw(alertVolume testVolume));
 
+# The 1.0 setting held only an HTTP Piper address.
+$prefs->migrate(2, sub {
+	my $old = $prefs->get('piperUrl');
+	$prefs->set('speechServer', $old) if $old && !$prefs->get('speechServer');
+	$prefs->set('piperUrl', '');
+	1;
+});
+
 my @held;
 my $lastFeedWarning = 0;
+my @voices;
+
+sub voices { return @voices }
+
+# Refreshes the voice list shown in settings. Only Wyoming servers can list voices.
+sub refreshVoices {
+	my ($host, $port) = Plugins::WeatherAlerts::Wyoming->parseServer($prefs->get('speechServer'));
+
+	if (!$host) {
+		@voices = ();
+		return;
+	}
+
+	Plugins::WeatherAlerts::Wyoming->describe(host => $host, port => $port, done => sub {
+		my ($info, $error) = @_;
+		@voices = $info ? Plugins::WeatherAlerts::Wyoming->voiceNames($info, 'en_') : ();
+		$log->warn("Could not list speech voices: $error") if !$info;
+	});
+}
 
 sub getDisplayName {
 	return 'PLUGIN_WEATHERALERTS';
@@ -79,6 +108,9 @@ sub initPlugin {
 	});
 
 	Slim::Utils::Timers::setTimer(undef, Time::HiRes::time() + HEALTH_SECONDS, \&_health);
+
+	refreshVoices();
+	$prefs->setChange(\&refreshVoices, 'speechServer');
 
 	$log->info('Started, zones: ' . ($prefs->get('zones') || 'not set'));
 }

@@ -1,0 +1,91 @@
+[% PROCESS settings/header.html %]
+
+	[% WRAPPER setting title="PLUGIN_TODAYALARM_PREVIEW" desc="PLUGIN_TODAYALARM_PREVIEW_DESC" %]
+		<div>[% preview | html %]</div>
+		<div>
+			<select name="playNowPlayer" id="playNowPlayer">
+			[% FOREACH player = players %]
+				<option value="[% player.id | html %]">[% player.name | html %]</option>
+			[% END %]
+			</select>
+			<input type="submit" class="stdclick" name="playNow" value="[% "PLUGIN_TODAYALARM_PLAY_NOW" | string %]">
+		</div>
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_TODAYALARM_STATUS" desc="PLUGIN_TODAYALARM_STATUS_DESC" %]
+		[% IF checking %]<div><b>[% "PLUGIN_TODAYALARM_CHECKING" | string %]</b></div>[% END %]
+		[% IF status.size %]
+		<table>
+			[% FOREACH row = status %]
+			<tr>
+				<td>[% row.kind | html %]</td>
+				<td>[% row.label | html %]</td>
+				<td>[% IF row.ok %][% "PLUGIN_TODAYALARM_OK" | string %][% ELSE %]<b>[% "PLUGIN_TODAYALARM_FAILED" | string %]</b> [% row.error | html %][% END %]</td>
+				<td>[% row.fetched | html %]</td>
+				<td>[% row.headline | html %]</td>
+			</tr>
+			[% END %]
+		</table>
+		[% END %]
+		<input type="submit" class="stdclick" name="checkNow" value="[% "PLUGIN_TODAYALARM_CHECK_NOW" | string %]">
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_TODAYALARM_GOOGLE" desc="PLUGIN_TODAYALARM_GOOGLE_DESC" %]
+		<textarea name="cal_google" id="cal_google" rows="2" cols="70">[% calendars.google | html %]</textarea>
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_TODAYALARM_OUTLOOK" desc="PLUGIN_TODAYALARM_OUTLOOK_DESC" %]
+		<textarea name="cal_outlook" id="cal_outlook" rows="2" cols="70">[% calendars.outlook | html %]</textarea>
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_TODAYALARM_ICLOUD" desc="PLUGIN_TODAYALARM_ICLOUD_DESC" %]
+		<textarea name="cal_icloud" id="cal_icloud" rows="2" cols="70">[% calendars.icloud | html %]</textarea>
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_TODAYALARM_MAX_EVENTS" desc="PLUGIN_TODAYALARM_MAX_EVENTS_DESC" %]
+		<input type="text" class="stdedit" name="pref_maxEvents" id="maxEvents" value="[% prefs.pref_maxEvents | html %]" size="4">
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_TODAYALARM_FEEDS" desc="PLUGIN_TODAYALARM_FEEDS_DESC" %]
+		<textarea name="feedList" id="feedList" rows="5" cols="70">[% feedList | html %]</textarea>
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_TODAYALARM_HEADLINES" desc="PLUGIN_TODAYALARM_HEADLINES_DESC" %]
+		<label>[% "PLUGIN_TODAYALARM_PER_FEED" | string %] <input type="text" class="stdedit" name="pref_perFeed" value="[% prefs.pref_perFeed | html %]" size="3"></label>
+		<label>[% "PLUGIN_TODAYALARM_TOTAL" | string %] <input type="text" class="stdedit" name="pref_totalHeadlines" value="[% prefs.pref_totalHeadlines | html %]" size="3"></label>
+		<label>[% "PLUGIN_TODAYALARM_FRESH" | string %] <input type="text" class="stdedit" name="pref_freshHours" value="[% prefs.pref_freshHours | html %]" size="4"></label>
+		<label><input type="checkbox" name="pref_sayFeedNames" value="1" [% IF prefs.pref_sayFeedNames %]checked[% END %]> [% "PLUGIN_TODAYALARM_SAY_NAMES" | string %]</label>
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_TODAYALARM_PLAYERS" desc="PLUGIN_TODAYALARM_PLAYERS_DESC" %]
+		[% FOREACH player = players %]
+			<div><label><input type="checkbox" name="player_enabled_[% player.key %]" value="1" [% IF player.enabled %]checked[% END %]> [% player.name | html %]</label></div>
+		[% END %]
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_TODAYALARM_WHEN" desc="PLUGIN_TODAYALARM_WHEN_DESC" %]
+		<div><label><input type="checkbox" name="pref_briefOnPower" value="1" [% IF prefs.pref_briefOnPower %]checked[% END %]> [% "PLUGIN_TODAYALARM_ON_POWER" | string %]</label></div>
+		<div><label><input type="checkbox" name="pref_briefOnTimeout" value="1" [% IF prefs.pref_briefOnTimeout %]checked[% END %]> [% "PLUGIN_TODAYALARM_ON_TIMEOUT" | string %]</label></div>
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_TODAYALARM_VOLUME" desc="PLUGIN_TODAYALARM_VOLUME_DESC" %]
+		<input type="text" class="stdedit" name="pref_briefingVolume" id="briefingVolume" value="[% prefs.pref_briefingVolume | html %]" size="4">
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_TODAYALARM_SPEECH" desc="PLUGIN_TODAYALARM_SPEECH_DESC" %]
+		<input type="text" class="stdedit" name="pref_speechServer" id="speechServer" value="[% prefs.pref_speechServer | html %]" size="30">
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_TODAYALARM_VOICE" desc="PLUGIN_TODAYALARM_VOICE_DESC" %]
+		[% IF voices.size %]
+			<select name="pref_voice" id="voice">
+			[% FOREACH name = voices %]
+				<option value="[% name | html %]" [% IF prefs.pref_voice == name %]selected[% END %]>[% name | html %]</option>
+			[% END %]
+			</select>
+		[% ELSE %]
+			<input type="text" class="stdedit" name="pref_voice" id="voice" value="[% prefs.pref_voice | html %]" size="30">
+		[% END %]
+	[% END %]
+
+[% PROCESS settings/footer.html %]

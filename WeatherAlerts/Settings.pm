@@ -21,7 +21,7 @@ sub page {
 }
 
 sub prefs {
-	return ($prefs, qw(zones pollSeconds alertVolume testVolume piperUrl quietEnabled quietStart quietEnd),
+	return ($prefs, qw(zones pollSeconds alertVolume testVolume speechServer voice quietEnabled quietStart quietEnd),
 		map { 'level_' . $_->{code} } Plugins::WeatherAlerts::Events::EVENTS);
 }
 
@@ -79,6 +79,7 @@ sub beforeRender {
 	$params->{feedError}   = $status->{lastError};
 	$params->{feedChecked} = $status->{lastSuccess} ? scalar(localtime($status->{lastSuccess})) : '';
 	$params->{feedActive}  = $status->{active};
+	$params->{voices}      = [ $plugin->voices ];
 }
 
 1;

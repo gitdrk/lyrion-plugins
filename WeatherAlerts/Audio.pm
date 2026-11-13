@@ -17,6 +17,7 @@ use Slim::Utils::Prefs;
 
 use Plugins::WeatherAlerts::Policy;
 use Plugins::WeatherAlerts::Same;
+use Plugins::WeatherAlerts::Wyoming;
 
 use constant REPEAT_LIMIT  => 45;
 use constant MAX_FILE_AGE  => 86400;
@@ -57,7 +58,30 @@ sub _clip {
 sub _speech {
 	my ($alert, $done) = @_;
 
-	my $url = $prefs->get('piperUrl');
+	my $server = $prefs->get('speechServer') || '';
+	my $text = Plugins::WeatherAlerts::Policy->speechText($alert);
+
+	if (my ($host, $port) = Plugins::WeatherAlerts::Wyoming->parseServer($server)) {
+		return Plugins::WeatherAlerts::Wyoming->synthesize(
+			host  => $host,
+			port  => $port,
+			voice => $prefs->get('voice'),
+			text  => $text,
+			done  => sub {
+				my ($wav, $error) = @_;
+				my $pcm = $S->readWav($wav);
+
+				if (!defined $pcm) {
+					$log->warn('Speech server failed: ' . ($error || 'unreadable audio') . '. Using the fallback clip.');
+					$pcm = _clip($alert->{code});
+				}
+
+				$done->($pcm);
+			},
+		);
+	}
+
+	my $url = $server =~ m{^https?://}i ? $server : '';
 
 	return $done->(_clip($alert->{code})) if !$url;
 
@@ -77,7 +101,7 @@ sub _speech {
 			$done->(_clip($alert->{code}));
 		},
 		{ timeout => PIPER_TIMEOUT },
-	)->post($url, 'Content-Type' => 'application/json', to_json({ text => Plugins::WeatherAlerts::Policy->speechText($alert) }));
+	)->post($url, 'Content-Type' => 'application/json', to_json({ text => $text }));
 }
 
 sub _sameEvent {

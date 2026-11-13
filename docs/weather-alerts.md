@@ -29,9 +29,14 @@ Then choose what each alert type does, pick your players, and use **Send test al
 
 Synced players are treated as one group and stay synced. Pressing Stop ends the alert on that player only.
 
-## Better speech (optional)
+## Full spoken alerts (optional)
 
-Without a speech server, the plugin plays a short recorded phrase such as "Tornado Warning". To hear the full alert text, run a [Piper](https://github.com/OHF-Voice/piper1-gpl) HTTP server that accepts `POST` JSON `{"text": "..."}` and returns a mono WAV, then enter its URL in the settings.
+Without a speech server, the plugin plays a short recorded phrase such as "Tornado Warning". To hear the full alert text, enter a speech server in the settings and pick a voice:
+
+- A Wyoming Piper server as `host:port`, the kind Home Assistant uses.
+- Or the URL of a [Piper](https://github.com/OHF-Voice/piper1-gpl) HTTP server that accepts `POST` JSON `{"text": "..."}` and returns a mono WAV.
+
+If the server can't be reached, the recorded phrase plays instead.
 
 ## Commands
 

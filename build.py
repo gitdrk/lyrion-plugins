@@ -14,6 +14,12 @@ DETAILS = {
         "category": "misc",
         "minTarget": "9.0",
     },
+    "TodayAlarm": {
+        "title": "Today Alarm",
+        "desc": "After you turn off an alarm, plays today's calendar events and news headlines, spoken and on screen.",
+        "category": "misc",
+        "minTarget": "9.0",
+    },
 }
 
 

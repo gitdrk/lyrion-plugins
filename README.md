@@ -5,6 +5,7 @@ Plugins for Lyrion Music Server, installed from one repository URL.
 | Plugin | Folder | Docs |
 | --- | --- | --- |
 | NOAA Weather Alerts (USA) | `WeatherAlerts` | [Guide](docs/weather-alerts.md) |
+| Today Alarm | `TodayAlarm` | [Guide](docs/today-alarm.md) |
 
 ## Install
 
@@ -20,6 +21,7 @@ Plugins for Lyrion Music Server, installed from one repository URL.
 ```bash
 perl t/pure.t
 perl t/takeover.t
+perl t/today.t
 python build.py
 ```
 
@@ -29,4 +31,4 @@ Build from a short folder path. Windows drops files from very long ones, and the
 
 ## Branches
 
-`main` holds released plugins. `sdr-radio` holds the SDR Radio plugin while it's in development.
+`main` holds released plugins. `sdr-radio` holds the SDR Radio plugin while it's in development. Today Alarm was built on `today-alarm`.

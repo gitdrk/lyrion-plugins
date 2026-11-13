@@ -88,8 +88,14 @@ PLUGIN_WEATHERALERTS_QUIET_DESC
 PLUGIN_WEATHERALERTS_QUIET_ON
 	EN	Use quiet hours
 
-PLUGIN_WEATHERALERTS_PIPER
-	EN	Piper speech server
+PLUGIN_WEATHERALERTS_SPEECH
+	EN	Speech server
 
-PLUGIN_WEATHERALERTS_PIPER_DESC
-	EN	Optional. The URL of a Piper HTTP server, used to read the full alert text. Without one, a short recorded phrase is used.
+PLUGIN_WEATHERALERTS_SPEECH_DESC
+	EN	Optional. A Wyoming Piper server as host:port, such as 192.168.1.10:10200, or the URL of a Piper HTTP server. It reads the full alert text. Without one, or if it fails, a short recorded phrase is used.
+
+PLUGIN_WEATHERALERTS_VOICE
+	EN	Voice
+
+PLUGIN_WEATHERALERTS_VOICE_DESC
+	EN	The Piper voice for alerts. The list fills in after a Wyoming speech server is saved and reached.

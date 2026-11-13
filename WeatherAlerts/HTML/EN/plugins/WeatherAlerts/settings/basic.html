@@ -67,8 +67,20 @@
 		<input type="text" class="stdedit" name="pref_quietEnd" value="[% prefs.pref_quietEnd | html %]" size="6">
 	[% END %]
 
-	[% WRAPPER setting title="PLUGIN_WEATHERALERTS_PIPER" desc="PLUGIN_WEATHERALERTS_PIPER_DESC" %]
-		<input type="text" class="stdedit" name="pref_piperUrl" id="piperUrl" value="[% prefs.pref_piperUrl | html %]" size="40">
+	[% WRAPPER setting title="PLUGIN_WEATHERALERTS_SPEECH" desc="PLUGIN_WEATHERALERTS_SPEECH_DESC" %]
+		<input type="text" class="stdedit" name="pref_speechServer" id="speechServer" value="[% prefs.pref_speechServer | html %]" size="40">
+	[% END %]
+
+	[% WRAPPER setting title="PLUGIN_WEATHERALERTS_VOICE" desc="PLUGIN_WEATHERALERTS_VOICE_DESC" %]
+		[% IF voices.size %]
+			<select name="pref_voice" id="voice">
+			[% FOREACH name = voices %]
+				<option value="[% name | html %]" [% IF prefs.pref_voice == name %]selected[% END %]>[% name | html %]</option>
+			[% END %]
+			</select>
+		[% ELSE %]
+			<input type="text" class="stdedit" name="pref_voice" id="voice" value="[% prefs.pref_voice | html %]" size="30">
+		[% END %]
 	[% END %]
 
 [% PROCESS settings/footer.html %]

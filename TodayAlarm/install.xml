@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<extension>
+	<id>C4CF22A4-D8E6-432E-903C-AD6336B6BDC8</id>
+	<name>PLUGIN_TODAYALARM</name>
+	<module>Plugins::TodayAlarm::Plugin</module>
+	<version>0.9.0</version>
+	<description>PLUGIN_TODAYALARM_DESC</description>
+	<creator>gitdrk</creator>
+	<category>misc</category>
+	<defaultState>enabled</defaultState>
+	<optionsURL>plugins/TodayAlarm/settings/basic.html</optionsURL>
+	<type>2</type><!-- type=extension -->
+
+	<targetApplication>
+		<id>Lyrion Music Server</id>
+		<minVersion>9.0</minVersion>
+		<maxVersion>*</maxVersion>
+	</targetApplication>
+</extension>

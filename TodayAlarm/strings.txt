@@ -1,0 +1,119 @@
+PLUGIN_TODAYALARM
+	EN	Today Alarm
+
+PLUGIN_TODAYALARM_DESC
+	EN	After you turn off an alarm, plays today's calendar events and news headlines, spoken and on screen.
+
+PLUGIN_TODAYALARM_CHIME
+	EN	Today Alarm: Morning Chime
+
+PLUGIN_TODAYALARM_PREVIEW
+	EN	Today's plan
+
+PLUGIN_TODAYALARM_PREVIEW_DESC
+	EN	What the briefing would say right now. Play it on a player to hear it.
+
+PLUGIN_TODAYALARM_PLAY_NOW
+	EN	Play today's plan now
+
+PLUGIN_TODAYALARM_STATUS
+	EN	Calendars and feeds
+
+PLUGIN_TODAYALARM_STATUS_DESC
+	EN	When each was last downloaded. They refresh every 30 minutes and after you save.
+
+PLUGIN_TODAYALARM_CHECKING
+	EN	Checking now. Reload this page in a few seconds.
+
+PLUGIN_TODAYALARM_CHECK_NOW
+	EN	Check calendars and feeds now
+
+PLUGIN_TODAYALARM_OK
+	EN	OK
+
+PLUGIN_TODAYALARM_FAILED
+	EN	Failed:
+
+PLUGIN_TODAYALARM_GOOGLE
+	EN	Google calendars
+
+PLUGIN_TODAYALARM_GOOGLE_DESC
+	EN	One link per line. In Google Calendar on the web, open a calendar's Settings and sharing, then copy the Secret address in iCal format from Integrate calendar. Saved links are shown shortened.
+
+PLUGIN_TODAYALARM_OUTLOOK
+	EN	Outlook calendars
+
+PLUGIN_TODAYALARM_OUTLOOK_DESC
+	EN	One link per line. In Outlook on the web, open Settings, Calendar, Shared calendars, then Publish a calendar with Can view all details, and copy the ICS link.
+
+PLUGIN_TODAYALARM_ICLOUD
+	EN	iCloud calendars
+
+PLUGIN_TODAYALARM_ICLOUD_DESC
+	EN	One link per line. In the Calendar app, turn on Public Calendar for a calendar and copy its share link. Links starting with webcal:// work as they are.
+
+PLUGIN_TODAYALARM_MAX_EVENTS
+	EN	Events to read
+
+PLUGIN_TODAYALARM_MAX_EVENTS_DESC
+	EN	The most events read out before saying how many more there are.
+
+PLUGIN_TODAYALARM_FEEDS
+	EN	News feeds
+
+PLUGIN_TODAYALARM_FEEDS_DESC
+	EN	One RSS or Atom feed per line, in order of importance. Add a name after a bar to have it read out, such as https://example.com/rss | Local news.
+
+PLUGIN_TODAYALARM_HEADLINES
+	EN	Headlines
+
+PLUGIN_TODAYALARM_HEADLINES_DESC
+	EN	Feeds take turns, newest first. A story that appears in two feeds is read once.
+
+PLUGIN_TODAYALARM_PER_FEED
+	EN	Per feed
+
+PLUGIN_TODAYALARM_TOTAL
+	EN	In total
+
+PLUGIN_TODAYALARM_FRESH
+	EN	Newer than (hours)
+
+PLUGIN_TODAYALARM_SAY_NAMES
+	EN	Say feed names
+
+PLUGIN_TODAYALARM_PLAYERS
+	EN	Players
+
+PLUGIN_TODAYALARM_PLAYERS_DESC
+	EN	Players that give a briefing after their alarm ends.
+
+PLUGIN_TODAYALARM_WHEN
+	EN	When to give the briefing
+
+PLUGIN_TODAYALARM_WHEN_DESC
+	EN	A briefing always follows Stop or Pause. These add the other ways an alarm can end.
+
+PLUGIN_TODAYALARM_ON_POWER
+	EN	Also after turning the player off
+
+PLUGIN_TODAYALARM_ON_TIMEOUT
+	EN	Also when the alarm times out with nobody there
+
+PLUGIN_TODAYALARM_VOLUME
+	EN	Briefing volume
+
+PLUGIN_TODAYALARM_VOLUME_DESC
+	EN	Volume for the briefing, from 1 to 100. The player's own volume returns afterwards.
+
+PLUGIN_TODAYALARM_SPEECH
+	EN	Speech server
+
+PLUGIN_TODAYALARM_SPEECH_DESC
+	EN	A Wyoming Piper server as host:port, such as 192.168.1.10:10200. Without one, the briefing is a chime and on-screen text only.
+
+PLUGIN_TODAYALARM_VOICE
+	EN	Voice
+
+PLUGIN_TODAYALARM_VOICE_DESC
+	EN	The list fills in after the speech server is saved and reached.
