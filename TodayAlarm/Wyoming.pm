@@ -136,19 +136,21 @@ sub _exchange {
 	require Time::HiRes;
 
 	my $state = $class->newParser;
+	my $async = Slim::Networking::Async->new;
 	my ($finished, $onTimeout);
 
+	# Every way out closes the socket, so Lyrion never keeps polling it.
 	my $finish = sub {
 		my ($result, $error) = @_;
 		return if $finished++;
 		Slim::Utils::Timers::killTimers($state, $onTimeout);
+		eval { $async->disconnect };
 		$args{done}->($result, $error);
 	};
 
 	$onTimeout = sub { $finish->(undef, 'The speech server took too long') };
 	Slim::Utils::Timers::setTimer($state, Time::HiRes::time() + ($args{timeout} || TIMEOUT), $onTimeout);
 
-	my $async = Slim::Networking::Async->new;
 	my $content = $args{content};
 
 	$async->write_async({
@@ -164,20 +166,25 @@ sub _exchange {
 		onRead      => sub {
 			my ($self) = @_;
 
-			my $bytes = '';
-			my $read = $self->socket->sysread($bytes, 65536);
+			my $ok = eval {
+				# The plain read: the HTTP socket class refuses its own sysread here.
+				my $bytes = '';
+				my $read = CORE::sysread($self->socket, $bytes, 65536);
 
-			if (!$read) {
-				$self->disconnect;
-				return $finish->(undef, 'The speech server closed the connection');
-			}
+				if (!defined $read) {
+					return 1 if $!{EAGAIN} || $!{EWOULDBLOCK} || $!{EINTR};
+					$finish->(undef, "Reading from the speech server failed: $!");
+					return 1;
+				}
 
-			my $result = $args{handle}->($state, $class->feed($state, $bytes));
+				return $finish->(undef, 'The speech server closed the connection') || 1 if $read == 0;
 
-			if (defined $result) {
-				$self->disconnect;
-				$finish->(@$result);
-			}
+				my $result = $args{handle}->($state, $class->feed($state, $bytes));
+				$finish->(@$result) if defined $result;
+				1;
+			};
+
+			$finish->(undef, "Speech request failed: $@") if !$ok;
 		},
 	});
 }
