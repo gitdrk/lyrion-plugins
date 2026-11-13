@@ -16,14 +16,14 @@ use Slim::Utils::Misc;
 use Slim::Utils::Prefs;
 
 use Plugins::WeatherAlerts::Policy;
-use Plugins::WeatherAlerts::Same;
+use Plugins::WeatherAlerts::Tones;
 use Plugins::WeatherAlerts::Wyoming;
 
 use constant REPEAT_LIMIT  => 45;
 use constant MAX_FILE_AGE  => 86400;
 use constant PIPER_TIMEOUT => 20;
 
-my $S     = 'Plugins::WeatherAlerts::Same';
+my $S     = 'Plugins::WeatherAlerts::Tones';
 my $log   = logger('plugin.weatheralerts');
 my $prefs = preferences('plugin.weatheralerts');
 
@@ -104,12 +104,6 @@ sub _speech {
 	)->post($url, 'Content-Type' => 'application/json', to_json({ text => $text }));
 }
 
-sub _sameEvent {
-	my ($alert) = @_;
-
-	return { OTHER => 'NWS', TEST => 'DMO' }->{ $alert->{code} } || $alert->{code};
-}
-
 sub _compose {
 	my ($alert, $level, $speech) = @_;
 
@@ -118,11 +112,7 @@ sub _compose {
 
 	return $S->chime . $S->silence(0.5) . $voice . $S->silence(0.5) if $level ne 'interrupt';
 
-	my $now = time;
-	my $minutes = $alert->{ends} && $alert->{ends} > $now ? int(($alert->{ends} - $now) / 60) : 60;
-	my $header = $S->header(event => _sameEvent($alert), fips => $alert->{fips}, minutes => $minutes, time => $now);
-
-	return $S->burst($header) . $S->attentionTone(8) . $S->silence(1) . $voice . $S->silence(1) . $S->burst('NNNN');
+	return $S->alertTone . $S->silence(0.8) . $voice . $S->silence(0.8) . $S->endTone;
 }
 
 sub _prune {

@@ -169,6 +169,11 @@ my $brief = $S->compose(now => $morning, hasCalendars => 1, maxEvents => 2, sayF
 is($brief->{text}, "Good morning. It's Thursday, November 12. You have three events today. All day, Holiday. 9 AM, Standup. And one more. "
 	. "I couldn't load your Outlook calendar. Here are today's headlines. From Local. Bridge reopens. Vote today! Have a good day.", 'spoken briefing');
 is($brief->{screens}[1][1], '9:00a  Standup', 'screen line for a timed event');
+is(join(',', @{ $brief->{clips} }), 'greet_morning,day_4,count_3,details,problem,headlines,goodbye', 'recorded phrases for the same briefing');
+is(join(',', @{ $S->compose(now => $morning, hasCalendars => 1)->{clips} }), 'greet_morning,day_4,count_0,goodbye', 'recorded phrases for an empty day');
+is(join(',', @{ $S->compose(now => $morning, hasCalendars => 1, events => [ map { { title => "E$_", start => $morning } } 1 .. 12 ])->{clips} }), 'greet_morning,day_4,count_many,details,goodbye', 'recorded phrases for a busy day');
+my %clip = map { s/\.wav$//r => 1 } map { (split m{/})[-1] } glob("$FindBin::Bin/../TodayAlarm/Clips/*.wav");
+ok($clip{$_}, "recorded phrase $_ exists") for qw(greet_morning greet_afternoon greet_evening count_many details headlines problem goodbye), (map { "day_$_" } 0 .. 6), (map { "count_$_" } 0 .. 10);
 is($S->spokenTime(local_epoch(2026, 11, 12, 12, 0)), 'Noon', 'noon');
 is($S->spokenTime(local_epoch(2026, 11, 12, 16, 30)), '4:30 PM', 'afternoon time');
 like($S->compose(now => $morning, hasCalendars => 1)->{text}, qr/Nothing on your calendar today\./, 'empty day');

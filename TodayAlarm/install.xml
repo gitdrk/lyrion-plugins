@@ -4,7 +4,7 @@
 	<id>C4CF22A4-D8E6-432E-903C-AD6336B6BDC8</id>
 	<name>PLUGIN_TODAYALARM</name>
 	<module>Plugins::TodayAlarm::Plugin</module>
-	<version>0.9.2</version>
+	<version>0.9.3</version>
 	<description>PLUGIN_TODAYALARM_DESC</description>
 	<creator>gitdrk</creator>
 	<category>misc</category>

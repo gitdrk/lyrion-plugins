@@ -110,7 +110,7 @@ PLUGIN_TODAYALARM_SPEECH
 	EN	Speech server
 
 PLUGIN_TODAYALARM_SPEECH_DESC
-	EN	A Wyoming Piper server as host:port, such as 192.168.1.10:10200. Without one, the briefing is a chime and on-screen text only.
+	EN	Optional. A Wyoming Piper server as host:port, such as 192.168.1.10:10200, which reads your events and headlines aloud. Without one, or if it fails, recorded phrases give the greeting, day and number of events, and the details appear on screen.
 
 PLUGIN_TODAYALARM_VOICE
 	EN	Voice

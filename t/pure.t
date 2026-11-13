@@ -17,10 +17,10 @@ BEGIN {
 
 use Plugins::WeatherAlerts::Events;
 use Plugins::WeatherAlerts::Policy;
-use Plugins::WeatherAlerts::Same;
+use Plugins::WeatherAlerts::Tones;
 
 my $P = 'Plugins::WeatherAlerts::Policy';
-my $S = 'Plugins::WeatherAlerts::Same';
+my $S = 'Plugins::WeatherAlerts::Tones';
 my $E = 'Plugins::WeatherAlerts::Events';
 
 is($E->codeFor('Tornado Warning'), 'TOR', 'event name maps to code');
@@ -88,19 +88,27 @@ my $long = $P->speechText({ %$alert, instruction => 'Stay inside. ' x 200 });
 ok(length($long) <= 900, 'long speech is capped');
 like($long, qr/\.$/, 'long speech ends on a sentence');
 
-my $time = 1793511720;
-my @utc = gmtime($time);
-my $issued = sprintf('%03d%02d%02d', $utc[7] + 1, $utc[2], $utc[1]);
-is($S->header(event => 'TOR', fips => ['018043'], minutes => 40, time => $time),
-	"ZCZC-WXR-TOR-018043+0045-$issued-LYRION00-", 'header format and rounded purge');
-is($S->header(event => 'DMO', time => $time), "ZCZC-WXR-DMO-000000+0100-$issued-LYRION00-", 'header defaults');
-my $many = $S->header(event => 'TOR', fips => [ ('018043') x 40 ], time => $time);
-is(scalar(() = $many =~ /018043/g), 31, 'header caps areas at 31');
-
-ok(abs($S->duration($S->attentionTone(8)) - 8) < 0.01, 'tone length');
-my $afsk = $S->afsk('NNNN');
-my $bits = 8 * 20;
-ok(abs($S->duration($afsk) - $bits / $S->BAUD) < 0.001, 'AFSK length matches bit rate');
+# The alert sounds must not resemble EAS or WEA signals.
+sub energy {
+	my ($pcm, $frequency) = @_;
+	my @x = unpack('s<*', $pcm);
+	my $w = 2 * cos(8 * atan2(1, 1) * $frequency / $S->RATE);
+	my ($s1, $s2) = (0, 0);
+	for my $v (@x) { my $s0 = $v + $w * $s1 - $s2; $s2 = $s1; $s1 = $s0 }
+	return ($s1 * $s1 + $s2 * $s2 - $w * $s1 * $s2) / (@x * @x);
+}
+for my $name (qw(alertTone endTone chime)) {
+	my $pcm = $S->$name;
+	my $loudest = 0;
+	for my $f (map { 300 + 10 * $_ } 0 .. 200) { my $e = energy($pcm, $f); $loudest = $e if $e > $loudest }
+	for my $avoid (853, 960, 1050, 1562.5, 2083.3) {
+		my $e = 0;
+		for my $f ($avoid - 15, $avoid, $avoid + 15) { my $x = energy($pcm, $f); $e = $x if $x > $e }
+		ok($e < $loudest / 20, "$name has no strong tone at $avoid Hz");
+	}
+}
+ok(abs($S->duration($S->alertTone) - 7) < 1, 'alert tone is about 7 seconds');
+ok($S->duration($S->endTone) < 1, 'end tone is short');
 
 my $wav = $S->wav("\1\0\2\0");
 is(length($wav), 48, 'WAV header size');

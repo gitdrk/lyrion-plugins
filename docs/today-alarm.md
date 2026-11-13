@@ -41,7 +41,9 @@ Feeds take turns, newest headline first, up to the per-feed and total limits. On
 
 ## Speech
 
-Enter a Wyoming Piper server as `host:port`, the same kind Home Assistant uses, then pick a voice. Without one, the briefing is a chime plus on-screen text, and players without a screen hear only the chime.
+Enter a Wyoming Piper server as `host:port` in the Speech server setting, the same kind Home Assistant uses, then pick a voice. It reads your events and headlines aloud.
+
+Without one, or if it can't be reached, the briefing uses recorded phrases: the greeting, the day and how many events you have, such as "Good morning. It's Friday. You have three events today." The event titles and headlines appear on the player's screen and in Material.
 
 ## Commands
 

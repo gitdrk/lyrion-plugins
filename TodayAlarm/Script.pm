@@ -48,7 +48,8 @@ sub _sentence {
 
 # Args: now, events, maxEvents, problems (calendar names that failed),
 # stale (calendar names using an old copy), headlines, sayFeedNames, hasCalendars.
-# Returns { text => spoken text, screens => [ [line1, line2], ... ] }.
+# Returns { text => spoken text, screens => [ [line1, line2], ... ],
+# clips => recorded phrase names for when there's no speech server }.
 sub compose {
 	my ($class, %args) = @_;
 
@@ -62,6 +63,13 @@ sub compose {
 	my $max = $args{maxEvents} || 8;
 	my @spoken = ("$greeting. It's $date.");
 	my @screens;
+	my @clips = ('greet_' . ($hour < 12 ? 'morning' : $hour < 17 ? 'afternoon' : 'evening'), "day_$now[6]");
+
+	if ($args{hasCalendars}) {
+		my $n = scalar @events;
+		push @clips, $n > 10 ? 'count_many' : "count_$n";
+		push @clips, 'details' if $n;
+	}
 
 	if (!$args{hasCalendars}) {
 		push @screens, [ "Today's Plan  $short", 'No calendars set up' ];
@@ -87,6 +95,8 @@ sub compose {
 		push @spoken, 'And ' . _count(@events - $max, 'more') . '.' if @events > $max;
 	}
 
+	push @clips, 'problem' if @{ $args{problems} || [] };
+
 	for my $name (@{ $args{problems} || [] }) {
 		push @spoken, "I couldn't load your $name calendar.";
 		push @screens, [ "Today's Plan", "$name calendar unavailable" ];
@@ -99,6 +109,7 @@ sub compose {
 	my @headlines = @{ $args{headlines} || [] };
 
 	if (@headlines) {
+		push @clips, 'headlines';
 		push @spoken, "Here are today's headlines.";
 		my $lastFeed = '';
 		my $index = 0;
@@ -116,7 +127,9 @@ sub compose {
 
 	push @spoken, 'Have a good day.';
 
-	return { text => join(' ', @spoken), screens => \@screens };
+	push @clips, 'goodbye';
+
+	return { text => join(' ', @spoken), screens => \@screens, clips => \@clips };
 }
 
 1;

@@ -1,6 +1,6 @@
 # NOAA Weather Alerts (USA) for Lyrion
 
-A Lyrion Music Server plugin that watches U.S. National Weather Service alerts for your county, interrupts your Squeezeboxes with SAME-style tones and a spoken message, then restores what each player was doing. Unofficial, and not affiliated with NOAA.
+A Lyrion Music Server plugin that watches U.S. National Weather Service alerts for your county, interrupts your Squeezeboxes with an alert tone and a spoken message, then restores what each player was doing. Unofficial, and not affiliated with NOAA.
 
 **This is not a life-safety system.** It needs power, your network and the internet. Keep a battery-backed NOAA Weather Radio as your primary warning.
 

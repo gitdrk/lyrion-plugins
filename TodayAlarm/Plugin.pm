@@ -3,6 +3,7 @@ package Plugins::TodayAlarm::Plugin;
 use strict;
 use base qw(Slim::Plugin::Base);
 
+use File::Basename qw(dirname);
 use File::Spec::Functions qw(catfile);
 use Time::HiRes;
 
@@ -245,9 +246,28 @@ sub _speak {
 	Plugins::TodayAlarm::Wyoming->synthesize(host => $host, port => $port, voice => $prefs->get('voice'), text => $text, done => sub {
 		my ($wav, $error) = @_;
 		my $pcm = Plugins::TodayAlarm::Sound->readWav($wav);
-		$log->warn('Speech server failed: ' . ($error || 'unreadable audio') . '. The briefing will be on screen only.') if !defined $pcm;
+		$log->warn('Speech server failed: ' . ($error || 'unreadable audio') . '. Using recorded phrases instead.') if !defined $pcm;
 		$done->($pcm);
 	});
+}
+
+# Joins the recorded phrases, for when there's no speech server or it fails.
+sub _recorded {
+	my (@names) = @_;
+
+	my $S = 'Plugins::TodayAlarm::Sound';
+	my @parts;
+
+	for my $name (@names) {
+		my $path = catfile(dirname(__FILE__), 'Clips', "$name.wav");
+		open(my $fh, '<:raw', $path) or next;
+		local $/;
+		my $pcm = $S->readWav(scalar <$fh>);
+		close($fh);
+		push @parts, $pcm if defined $pcm;
+	}
+
+	return @parts ? join($S->silence(0.3), @parts) : undef;
 }
 
 sub script {
@@ -277,6 +297,8 @@ sub brief {
 
 	_speak($script->{text}, sub {
 		my ($speech) = @_;
+
+		$speech = _recorded(@{ $script->{clips} }) if !defined $speech;
 
 		my $pcm = $S->chime . $S->silence(0.4) . (defined $speech ? $speech . $S->silence(0.6) : '');
 
