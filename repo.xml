@@ -11,16 +11,16 @@
       <category>misc</category>
       <link>https://github.com/gitdrk/lyrion-plugins</link>
       <url>https://github.com/gitdrk/lyrion-plugins/releases/download/WeatherAlerts-v1.2.0/WeatherAlerts-1.2.0.zip</url>
-      <sha>d8055f5e1a0e47bb5603b50851b50ce6cb14dfa0</sha>
+      <sha>3c44316968a336ceb4d73233378081ac1dc2ed53</sha>
     </plugin>
-    <plugin name="TodayAlarm" version="0.9.3" minTarget="9.0" maxTarget="*">
+    <plugin name="TodayAlarm" version="0.9.4" minTarget="9.0" maxTarget="*">
       <title lang="EN">Today Alarm</title>
       <desc lang="EN">After you turn off an alarm, plays today's calendar events and news headlines, spoken and on screen.</desc>
       <creator>gitdrk</creator>
       <category>misc</category>
       <link>https://github.com/gitdrk/lyrion-plugins</link>
-      <url>https://github.com/gitdrk/lyrion-plugins/releases/download/TodayAlarm-v0.9.3/TodayAlarm-0.9.3.zip</url>
-      <sha>4d69b88201124f3fea2c4ca935c2cfc052366758</sha>
+      <url>https://github.com/gitdrk/lyrion-plugins/releases/download/TodayAlarm-v0.9.4/TodayAlarm-0.9.4.zip</url>
+      <sha>e746d989970d9e32704eba21d6c65962c2c9b909</sha>
     </plugin>
   </plugins>
 </extensions>

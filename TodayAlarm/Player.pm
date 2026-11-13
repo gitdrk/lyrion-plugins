@@ -17,6 +17,7 @@ use Slim::Utils::Timers;
 use constant TICK         => 1;
 use constant START_LIMIT  => 12;
 use constant OVERRUN      => 15;
+use constant FINISH_MARGIN => 1.5;
 use constant SCREEN_EVERY => 4;
 
 my $log         = logger('plugin.todayalarm');
@@ -80,9 +81,12 @@ sub _tick {
 	my $elapsed = Time::HiRes::time() - $job->{begun};
 	my $mode = Slim::Player::Source::playmode($client);
 
-	$job->{seen} = 1 if $mode eq 'play';
+	$job->{seen} ||= Time::HiRes::time() if $mode eq 'play';
 
-	if (($job->{seen} && $mode ne 'play') || (!$job->{seen} && $elapsed > START_LIMIT) || $elapsed > $job->{duration} + OVERRUN) {
+	# Some players, such as SqueezePlayer, keep reporting play after a short file ends.
+	my $finished = $job->{seen} && Time::HiRes::time() - $job->{seen} > $job->{duration} + FINISH_MARGIN;
+
+	if (($job->{seen} && $mode ne 'play') || $finished || (!$job->{seen} && $elapsed > START_LIMIT) || $elapsed > $job->{duration} + OVERRUN) {
 		$log->warn('The briefing never started on ' . $client->name) if !$job->{seen};
 		return _restore($client, $id);
 	}
