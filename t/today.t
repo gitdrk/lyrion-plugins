@@ -188,7 +188,7 @@ is(length($snd->readWav($snd->wav("\1\0\2\0"))), 4, 'WAV round trip');
 
 # Wyoming parser
 my $W = 'Plugins::TodayAlarm::Wyoming';
-is_deeply([ $W->parseServer('tcp://192.168.1.205:30546') ], [ '192.168.1.205', 30546 ], 'server with tcp prefix');
+is_deeply([ $W->parseServer('tcp://192.168.1.10:10200') ], [ '192.168.1.10', 10200 ], 'server with tcp prefix');
 is_deeply([ $W->parseServer('nas.local:10200') ], [ 'nas.local', 10200 ], 'server by name');
 is_deeply([ $W->parseServer('https://x:1/path') ], [], 'URL is not a Wyoming server');
 my $chunkData = q({"rate": 22050, "width": 2, "channels": 1});
