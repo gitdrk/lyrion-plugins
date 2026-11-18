@@ -32,3 +32,7 @@ Build from a short folder path. Windows drops files from very long ones, and the
 ## Branches
 
 `main` holds released plugins. `sdr-radio` holds the SDR Radio plugin while it's in development. Today Alarm was built on `today-alarm`.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
