@@ -7,6 +7,8 @@ Plugins for Lyrion Music Server, installed from one repository URL.
 | NOAA Weather Alerts (USA) | `WeatherAlerts` | [Guide](docs/weather-alerts.md) |
 | Today Alarm | `TodayAlarm` | [Guide](docs/today-alarm.md) |
 
+**NOAA Weather Alerts is not a life-safety system.** Alerts can be late, missed or wrong, and it only hears alerts sent through the National Weather Service. Many local emergency alerts go only to phones. Keep a battery-backed NOAA Weather Radio and your phone's emergency alerts on. The plugins come with no warranty; see the license.
+
 ## Install
 
 1. In Lyrion, open Settings, then Plugins.

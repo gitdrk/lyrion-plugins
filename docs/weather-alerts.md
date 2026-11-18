@@ -2,7 +2,23 @@
 
 A Lyrion Music Server plugin that watches U.S. National Weather Service alerts for your county, interrupts your Squeezeboxes with an alert tone and a spoken message, then restores what each player was doing. Unofficial, and not affiliated with NOAA.
 
-**This is not a life-safety system.** It needs power, your network and the internet. Keep a battery-backed NOAA Weather Radio as your primary warning.
+**This is not a life-safety system.** Alerts can be late, missed or wrong. It needs power, your network, the internet and the National Weather Service's alert feed, and any of them can fail. Keep a battery-backed NOAA Weather Radio and your phone's emergency alerts on as your primary warnings. The plugin comes with no warranty; see the license.
+
+## Which alerts it hears
+
+Every alert the National Weather Service issues for your zones: weather, and non-weather emergencies that local officials send through the NWS, such as evacuations, shelter in place, hazardous materials and AMBER alerts.
+
+It can't hear alerts sent only through FEMA's alert system to phones (Wireless Emergency Alerts) or only to broadcast stations, and many local emergencies are sent that way. Your phone remains the most complete source.
+
+## Alert types
+
+| Group | Interrupt every player | Interrupt players already on | Show on screen only |
+| --- | --- | --- | --- |
+| Weather | Tornado, Severe Thunderstorm, Flash Flood, Extreme Wind, Hurricane and Tsunami warnings | Tornado Watch, Severe Thunderstorm Watch, Winter Storm Warning | |
+| Non-weather emergencies | Evacuation Immediate, Shelter In Place, Civil Danger, Civil Emergency Message, Local Area Emergency, Hazardous Materials, Nuclear Power Plant, Radiological Hazard, Law Enforcement, Fire, Earthquake and Volcano warnings | Child Abduction Emergency (AMBER), Blue Alert | 911 Telephone Outage, Administrative Message |
+| Everything else | | | All other alerts |
+
+Each type can be changed on the settings page. Test and exercise messages never play.
 
 ## Install
 

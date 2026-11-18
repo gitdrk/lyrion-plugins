@@ -26,6 +26,14 @@ my $E = 'Plugins::WeatherAlerts::Events';
 is($E->codeFor('Tornado Warning'), 'TOR', 'event name maps to code');
 is($E->codeFor('winter storm warning'), 'WSW', 'matching ignores case');
 is($E->codeFor('Gale Warning'), 'OTHER', 'unknown events fall to OTHER');
+is($E->codeFor('Evacuation Immediate'), 'EVI', 'non-weather event maps to code');
+is($E->codeFor('Child Abduction Emergency'), 'CAE', 'AMBER alert maps to code');
+my %groups = ($E->GROUPS);
+ok($groups{$_->{group}}, "$_->{code} has a known group") for $E->EVENTS;
+my %codes; $codes{$_->{code}}++ for $E->EVENTS;
+ok(!grep({ $_ > 1 } values %codes), 'event codes are unique');
+my %clips = map { s/\.wav$//r => 1 } map { (split m{/})[-1] } glob("$FindBin::Bin/../WeatherAlerts/Clips/*.wav");
+ok($clips{$_->{code}}, "$_->{code} has a recorded phrase") for grep { $_->{level} =~ /interrupt|announce/ } $E->EVENTS;
 
 is($P->parseTime('2026-11-01T09:46:00-07:00'), $P->parseTime('2026-11-01T16:46:00+00:00'), 'offsets apply');
 is($P->parseTime('2026-11-01T16:46:00Z'), $P->parseTime('2026-11-01T16:46:00+00:00'), 'Z is UTC');
@@ -64,6 +72,10 @@ is($decide->(now => $alert->{expires} + 1), 'ignore', 'expired alert is ignored'
 is($decide->(alert => { code => 'TOA' }), 'announce', 'watch announces');
 is($decide->(alert => { code => 'TOA' }, quiet => 1), 'hold', 'watch waits out quiet hours');
 is($decide->(alert => { code => 'OTHER' }), 'display', 'other alerts display');
+is($decide->(alert => { code => 'EVI' }), 'interrupt', 'evacuation interrupts');
+is($decide->(alert => { code => 'EVI' }, quiet => 1), 'interrupt', 'evacuation ignores quiet hours');
+is($decide->(alert => { code => 'CAE' }), 'announce', 'AMBER alert announces');
+is($decide->(alert => { code => 'TOE' }), 'display', '911 outage displays');
 is($decide->(alert => { code => 'OTHER' }, quiet => 1), 'hold', 'display also waits');
 is($decide->(levels => { %levels, TOR => 'off' }), 'ignore', 'user can turn a type off');
 

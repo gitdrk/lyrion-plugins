@@ -9,8 +9,9 @@ GITHUB = "https://github.com/gitdrk/lyrion-plugins"
 DETAILS = {
     "WeatherAlerts": {
         "title": "NOAA Weather Alerts (USA)",
-        "desc": "Plays U.S. National Weather Service alerts on your Squeezeboxes, then restores what was playing. "
-                "Unofficial, and not affiliated with NOAA.",
+        "desc": "Plays U.S. National Weather Service alerts, including non-weather emergencies the NWS relays, on your "
+                "Squeezeboxes, then restores what was playing. Unofficial, and not affiliated with NOAA. "
+                "Not a life-safety system: alerts can be late, missed or wrong.",
         "category": "misc",
         "minTarget": "9.0",
     },

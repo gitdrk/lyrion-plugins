@@ -25,7 +25,12 @@
 
 	[% WRAPPER setting title="PLUGIN_WEATHERALERTS_EVENTS" desc="PLUGIN_WEATHERALERTS_EVENTS_DESC" %]
 		<table>
+		[% lastGroup = '' %]
 		[% FOREACH event = events %]
+			[% IF event.group != lastGroup %]
+			<tr><td colspan="2"><b>[% groupNames.${event.group} | html %]</b></td></tr>
+			[% lastGroup = event.group %]
+			[% END %]
 			[% key = 'pref_level_' _ event.code %]
 			<tr>
 				<td><label for="[% key %]">[% event.name | html %]</label></td>

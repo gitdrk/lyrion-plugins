@@ -66,6 +66,7 @@ sub beforeRender {
 	my $status = Plugins::WeatherAlerts::Feed->status;
 
 	$params->{events} = [ Plugins::WeatherAlerts::Events::EVENTS ];
+	$params->{groupNames} = { Plugins::WeatherAlerts::Events::GROUPS };
 	$params->{levels} = [ Plugins::WeatherAlerts::Events::LEVELS ];
 
 	$params->{players} = [ map { {

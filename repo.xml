@@ -4,14 +4,14 @@
     <title lang="EN">gitdrk Lyrion Plugins</title>
   </details>
   <plugins>
-    <plugin name="WeatherAlerts" version="1.2.0" minTarget="9.0" maxTarget="*">
+    <plugin name="WeatherAlerts" version="1.3.0" minTarget="9.0" maxTarget="*">
       <title lang="EN">NOAA Weather Alerts (USA)</title>
-      <desc lang="EN">Plays U.S. National Weather Service alerts on your Squeezeboxes, then restores what was playing. Unofficial, and not affiliated with NOAA.</desc>
+      <desc lang="EN">Plays U.S. National Weather Service alerts, including non-weather emergencies the NWS relays, on your Squeezeboxes, then restores what was playing. Unofficial, and not affiliated with NOAA. Not a life-safety system: alerts can be late, missed or wrong.</desc>
       <creator>gitdrk</creator>
       <category>misc</category>
       <link>https://github.com/gitdrk/lyrion-plugins</link>
-      <url>https://github.com/gitdrk/lyrion-plugins/releases/download/WeatherAlerts-v1.2.0/WeatherAlerts-1.2.0.zip</url>
-      <sha>3c44316968a336ceb4d73233378081ac1dc2ed53</sha>
+      <url>https://github.com/gitdrk/lyrion-plugins/releases/download/WeatherAlerts-v1.3.0/WeatherAlerts-1.3.0.zip</url>
+      <sha>59855c474d0d6ac03370700e8b68dae5392cbb49</sha>
     </plugin>
     <plugin name="TodayAlarm" version="0.9.4" minTarget="9.0" maxTarget="*">
       <title lang="EN">Today Alarm</title>
@@ -20,7 +20,7 @@
       <category>misc</category>
       <link>https://github.com/gitdrk/lyrion-plugins</link>
       <url>https://github.com/gitdrk/lyrion-plugins/releases/download/TodayAlarm-v0.9.4/TodayAlarm-0.9.4.zip</url>
-      <sha>e746d989970d9e32704eba21d6c65962c2c9b909</sha>
+      <sha>68b4baec7138c63918649aa448557e25bdfec89a</sha>
     </plugin>
   </plugins>
 </extensions>

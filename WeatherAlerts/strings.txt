@@ -2,7 +2,7 @@ PLUGIN_WEATHERALERTS
 	EN	NOAA Weather Alerts (USA)
 
 PLUGIN_WEATHERALERTS_DESC
-	EN	Plays U.S. National Weather Service alerts on your Squeezeboxes, then restores what was playing. Unofficial, and not affiliated with NOAA.
+	EN	Plays U.S. National Weather Service alerts, including non-weather emergencies the NWS relays, on your Squeezeboxes, then restores what was playing. Unofficial, and not affiliated with NOAA. Not a life-safety system: alerts can be late, missed or wrong, and only alerts sent through the National Weather Service are heard. Keep a battery-backed NOAA Weather Radio and your phone's emergency alerts on.
 
 PLUGIN_WEATHERALERTS_STATUS
 	EN	Alert feed
@@ -17,7 +17,7 @@ PLUGIN_WEATHERALERTS_FEED_BAD
 	EN	Alerts are not being received.
 
 PLUGIN_WEATHERALERTS_BACKUP
-	EN	This plugin needs power, your network and the internet. Keep a battery-backed weather radio as your primary warning.
+	EN	Not a life-safety system: alerts can be late, missed or wrong, and only alerts sent through the National Weather Service are heard. Keep a battery-backed NOAA Weather Radio and your phone's emergency alerts on. This plugin also needs power, your network and the internet.
 
 PLUGIN_WEATHERALERTS_TEST
 	EN	Test
@@ -47,7 +47,7 @@ PLUGIN_WEATHERALERTS_EVENTS
 	EN	Alert types
 
 PLUGIN_WEATHERALERTS_EVENTS_DESC
-	EN	Choose what each alert type does. Warnings set to interrupt every player ignore quiet hours.
+	EN	Choose what each alert type does. Warnings set to interrupt every player ignore quiet hours. Non-weather emergencies only appear when local officials send them through the NWS; many go only to phones.
 
 PLUGIN_WEATHERALERTS_LEVEL_INTERRUPT
 	EN	Interrupt every player
